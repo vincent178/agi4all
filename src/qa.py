@@ -17,8 +17,8 @@ db = Chroma("vectorstores", embedding_model, persist_directory="vectorstores")
 
 llm = Ollama(model="mistral:latest",
              verbose=True,
+             temperature=0,
              callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]))
-
 
 QA_CHAIN_PROMPT = hub.pull("rlm/rag-prompt-llama")
 
@@ -30,5 +30,3 @@ qa_chain = RetrievalQA.from_chain_type(
 
 question = "how to configure Docker for sneakers application?"
 result = qa_chain({"query": question})
-
-# print("\nAnswer:", result)
